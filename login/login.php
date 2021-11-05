@@ -1,6 +1,5 @@
 <?php
-require("backend-index.php");
-require("auth.php");
+require("backend-login.php");
 ?>
 <!doctype html>
 <html lang="en">
@@ -13,10 +12,11 @@ require("auth.php");
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <title>Hello, PHP!</title>
+    <title>Hello, PHP LOGIN!</title>
 </head>
 
 <body>
+
     <!-- Header Nav bar -->
     <nav class="navbar navbar-light bg-light fixed-top <?php echo $bttn; ?>">
         <div class="container-fluid">
@@ -32,17 +32,17 @@ require("auth.php");
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Link</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                USER
+                                Dropdown
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
-                                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                                <li><a class="dropdown-item" href="#">Action</a></li>
                                 <li><a class="dropdown-item" href="#">Another action</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
@@ -61,45 +61,31 @@ require("auth.php");
     </nav>
 
     <!-- notification -->
-    <div class="container-sm" style="padding-top: 60px;">
-       <?php display_alert($alert); ?>
-        <!-- Form input -->
-        <form method="POST" action="index.php">
-            <div class="mb-3">
-                <label for="fname" class="form-label">First Name</label>
-                <input type="text" class="form-control" name="fname" value="<?php echo $fname; ?>">
-                <label for="lname" class="form-label">Last Name</label>
-                <input type="password" class="form-control" name="lname" value="<?php echo $lname; ?>">
-                <input type="hidden" class="form-control" name="id_update" value="<?php echo $id_update; ?>">
+    <div class="container" style="padding-top: 160px;">
+    <?php display_alert($alert); ?>
+        <h1>LOGIN PORTAL</h1>
+        <form action="login.php" method="POST">
+            <div class="form-floating mb-3">
+                <input type="email" name="login_email" class="form-control" value="<?php echo $login_email;?>" >
+                <label for="floatingInput">Email address</label>
             </div>
-            <button type="submit" class="<?php echo $bttn_class; ?>" name="<?php echo $bttn_name; ?>"><?php echo $bttn_label; ?></button>
+            <div class="form-floating">
+            <!-- pattern="(?=.*\d)(?=.*[a-z])(?=.*?[0-9])(?=.*?[~`!@#$%\^&*()\-_=+[\]{};:\x27.,\x22\\|/?><]).{8,}" title="Must contain Numbers, Uppercase/Lowercase and at least 8 or more characters" -->
+                <input type="password" name="login_pass" class="form-control" value="<?php echo $login_pass;?>">
+                <label for="floatingPassword">Password</label>
+            </div>
+            <div class="container" style="padding-top: 20px;">
+                <button type="submit" name="login_bttn" class="btn btn-primary btn-lg">LOGIN</button>
+                <a href="register.php" class="btn btn-warning btn-lg">REGISTER</a>
+            </div>
         </form>
-    </div>
-    <!-- Display Table -->
-    <div class="container-sm">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-            <form method='POST' action='index.php'>
-                <?php tbl_test_display($table, $db) ?>  
-            </form>
-            </tbody>
-        </table>
-    </div>
-<!-- Button trigger modal -->
 
-<!-- Modal -->
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 
 

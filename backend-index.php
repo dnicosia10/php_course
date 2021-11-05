@@ -1,5 +1,6 @@
 <?php
 require("connect.php");
+$table = "test_mysql";
 $fname = "";
 $lname = "";
 $fullname = "";
@@ -31,9 +32,9 @@ if (isset($_POST['add_bttn'])) {
     if (($conf_status_fname === "true") && ($conf_status_lname === "true")) {
         $alert = "success";
         $fullname = "Full name: $fname, $lname";
-        tbl_user_write($fname, $lname, $db);
+        tbl_test_write($fname, $lname, $table, $db);
         // $mysql = $db->prepare(
-        //     "INSERT INTO test_mysql (name_test, link_test) VALUES (?, ?)");
+        //     "INSERT INTO test_mysql (name_test, pass_test) VALUES (?, ?)");
         //     $stmt->bind_param('ss', $fname, $lname);
         // $stmt->execute();
         debug_to_console("Insert success $fullname ...");
@@ -49,7 +50,7 @@ if (isset($_POST['delete_bttn'])) {
     debug_to_console($_POST['id']);
     $id_number_delete = $_POST['id'];
     $alert = "deleted";
-    tbl_user_delete($id_number_delete, $db);
+    tbl_user_delete($id_number_delete, $table, $db);
 }
 //calling update function
 if (isset($_POST['update_bttn'])) {
@@ -67,5 +68,5 @@ if (isset($_POST['update_bttn_push'])) {
     $id = $_POST['id_update'];
     $alert = "updated";
     debug_to_console($_POST['id_update']);
-    tbl_user_update($fname, $lname, $id, $db);
+    tbl_user_update($fname, $lname, $id, $table, $db);
 }
